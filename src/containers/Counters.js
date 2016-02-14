@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class Counter extends Component {
     constructor( props ) {
@@ -29,7 +30,7 @@ class Counter extends Component {
     }
 }
 
-export class App extends Component {
+export default class Counters extends Component {
     render() {
         return (
             <div>
