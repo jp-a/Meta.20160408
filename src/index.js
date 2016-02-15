@@ -7,8 +7,6 @@ import { bindActionCreators } from 'redux'
 import Counters from './containers/Counters'
 import DevTools from './containers/DevTools'
 
-import _ from 'lodash'
-
 import configureStore from './data/configureStore'
 const store = configureStore();
 
@@ -121,7 +119,9 @@ class Meta extends Component {
 
         let node = undefined;
         if( this.props.params.splat ) {
-            node = _.where( this.props.nodes, { _id: this.props.params.splat } )[ 0 ];
+            // jpa - 15/02/2016 - 19:11 // lodash refusing to work for whatever reason... reverting to native.
+            // node = _where( this.props.nodes, { _id: this.props.params.splat } )[ 0 ];
+            node = this.props.nodes.filter( ( obj ) => obj._id === this.props.params.splat )[ 0 ];
             if ( node ) this.state.node = node;
         }
 
