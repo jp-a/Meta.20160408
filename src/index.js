@@ -263,6 +263,7 @@ class Meta extends Component {
             // node = _where( this.props.nodes, { _id: this.props.params.splat } )[ 0 ];
             node = this.props.nodes.filter( ( obj ) => obj._id === this.props.params.splat )[ 0 ];
             if ( node ) this.state.node = node;
+            else this.state.node = undefined;
         }
 
 
