@@ -3,6 +3,10 @@ var webpack = require( 'webpack' );
 
 module.exports = {
     devtool: 'source-map',
+    // devtool: 'eval-source-map',
+    // devtool: 'eval-cheap-module-source-map',
+    // devtool: 'eval-cheap-source-map',
+    // devtool: 'eval',
     entry: [
         'eventsource-polyfill', // necessary for hot reloading with IE
         'webpack-hot-middleware/client',
@@ -10,6 +14,7 @@ module.exports = {
     ],
     output: {
         path: path.join( __dirname, 'dist' ),
+        pathinfo: path.join( __dirname, 'src' ),
         filename: 'bundle.js',
         publicPath: '/static/'
     },
