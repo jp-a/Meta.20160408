@@ -12,9 +12,14 @@ export default class Node extends Component {
         this.props.actions.deleteNode( this.props.node._id );
     }
 
-    handleEdit( text ) {
+    handleEditTitle( title ) {
+        console.log( 'handleEdit(', title, ')' );
+        this.props.actions.editNode( this.props.node._id, { title: title } );
+    }
+
+    handleEditText( text ) {
         console.log( 'handleEdit(', text, ')' );
-        this.props.actions.editNode( this.props.node._id, text );
+        this.props.actions.editNode( this.props.node._id, { text: text } );
     }
 
     render() {
@@ -28,8 +33,10 @@ export default class Node extends Component {
                 </td>
                 <td><Link to={ node._id }>{ node._id }</Link></td>
                 <td>{ node._rev }</td>
-                <td><InputEditable key={ node._rev } value={ node.text } html={ node.text }
-                                   onEdit={ this.handleEdit.bind( this ) }/></td>
+                <td><InputEditable key={ node._id + '_title' } value={ node.title }
+                                   onEdit={ this.handleEditTitle.bind( this ) }/></td>
+                <td><InputEditable key={ node._id + '_text' } value={ node.text }
+                                   onEdit={ this.handleEditText.bind( this ) }/></td>
                 {/*<td><Editor key={ node._rev } html={ node.text }/></td>*/}
             </tr>
         )

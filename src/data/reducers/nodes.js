@@ -15,18 +15,17 @@ export default function nodes( state = initialState, action ) {
     switch ( action.type ) {
         case ADD_NODE:
             return [
-                {
+                Object.assign( {
                     _id: id(),
                     ct: new Date(),
                     completed: false,
-                    text: action.text
-                },
+                }, action.node ),
                 ...state
             ];
 
         case INSERT_NODE:
-            if( Array.isArray( action.node ) ) {
-                return action.node.concat ( [
+            if ( Array.isArray( action.node ) ) {
+                return action.node.concat( [
                     ...state
                 ] );
             } else {
@@ -44,7 +43,7 @@ export default function nodes( state = initialState, action ) {
         case EDIT_NODE:
             return state.map( node =>
                 node._id === action.id ?
-                    Object.assign( {}, node, { text: action.text } ) :
+                    Object.assign( {}, node, action.node ) :
                     node
             );
 

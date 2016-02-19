@@ -1,15 +1,15 @@
 import * as types from '../constants/ActionTypes'
 
-export function addNode( text ) {
-    return { type: types.ADD_NODE, text }
+export function addNode( node ) {
+    return { type: types.ADD_NODE, node }
 }
 
 export function deleteNode( id ) {
     return { type: types.DELETE_NODE, id }
 }
 
-export function editNode( id, text ) {
-    return { type: types.EDIT_NODE, id, text }
+export function editNode( id, node ) {
+    return { type: types.EDIT_NODE, id, node }
 }
 
 export function completeNode( id ) {
