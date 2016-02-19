@@ -27,4 +27,4 @@ const DevTools = createDevTools(
     </DockMonitor>
 );
 
-export default DevTools;
+export default DevTools

@@ -25,7 +25,7 @@ class Nodes extends Component {
     }
 }
 
-import * as NodesActions from '../data/actions/nodes';
+import * as NodesActions from '../data/actions/nodes'
 Nodes = connect(
     ( state ) => {
         return { nodes: state.nodes, syncState: state.syncState }

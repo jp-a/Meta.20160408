@@ -1,39 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-
-class ContentEditable extends Component {
-    render() {
-        return (
-            <span ref={ ( c ) => this._input = c }
-                  onInput={ this.handleInput.bind( this ) }
-                  onBlur={ this.handleChange.bind( this ) }
-                  contentEditable='true'
-                  dangerouslySetInnerHTML={ { __html: this.props.html } }>
-        	</span>
-        );
-    }
-
-    shouldComponentUpdate( nextProps ) {
-        return nextProps.html !== this._input.innerHTML;
-    }
-
-    handleInput() {
-    }
-
-    handleChange() {
-        var html = this._input.innerHTML;
-        if ( this.props.onChange && html !== this.lastHtml ) {
-            this.props.onChange( {
-                target: {
-                    value: html
-                }
-            } );
-        }
-        this.lastHtml = html;
-        this.props.onBlur( html );
-    }
-}
-
 class TextInput extends Component {
     constructor( props, context ) {
         super( props, context );
@@ -85,4 +51,4 @@ TextInput.propTypes = {
     editing: PropTypes.bool,
 };
 
-export default TextInput;
+export default TextInput

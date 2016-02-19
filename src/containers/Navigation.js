@@ -41,7 +41,7 @@ class Navigation extends Component {
     }
 }
 
-import * as NodesActions from '../data/actions/nodes';
+import * as NodesActions from '../data/actions/nodes'
 Navigation = connect(
     ( state ) => {
         return { nodes: state.nodes, syncState: state.syncState }
@@ -51,4 +51,4 @@ Navigation = connect(
     }
 )( Navigation );
 
-export default Navigation;
+export default Navigation
