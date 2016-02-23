@@ -33,9 +33,9 @@ export default class Node extends Component {
                 </td>
                 <td><Link to={ node._id }>{ node._id }</Link></td>
                 <td>{ node._rev }</td>
-                <td><InputEditable key={ node._id + '_title' } value={ node.title }
+                <td><InputEditable key={ node._id + '_title' } html={ node.title }
                                    onEdit={ this.handleEditTitle.bind( this ) }/></td>
-                <td><InputEditable key={ node._id + '_text' } value={ node.text }
+                <td><InputEditable key={ node._id + '_text' } html={ node.text }
                                    onEdit={ this.handleEditText.bind( this ) }/></td>
                 {/*<td><Editor key={ node._rev } html={ node.text }/></td>*/}
             </tr>
