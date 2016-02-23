@@ -13,14 +13,12 @@ class Nodes extends Component {
 
     render() {
         return <div>
-            <table>
-                <tbody>
+            <div className='nodes'>
                 { this.props.nodes.map( ( node, index ) =>
                     <Node key={ node._id } index={ index } node={ node }
                           actions={ this.props.actions }/>
                 ) }
-                </tbody>
-            </table>
+            </div>
         </div>
     }
 }

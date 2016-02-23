@@ -44,7 +44,6 @@ class LoginContainer extends Component {
             <div>
                 <h2>Enter your name</h2>
                 <input type='text' ref='name' onKeyPress={ ( e ) => {
-                    console.log( e );
                     if ( e.key === 'Enter' ) { this.onClick( e ) }
                 }}/>
                 <br/>

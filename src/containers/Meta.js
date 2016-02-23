@@ -32,7 +32,7 @@ class Meta extends Component {
         <div>Meta{ this.props.params.splat && ( ': ' + this.props.params.splat ) }</div>
 
         { !node && <Nodes/> }
-        { node &&
+        { this.state.node &&
         <Node key={ node._id } index={ 0 } node={ node } actions={ this.props.actions }/> }
 
         </div>

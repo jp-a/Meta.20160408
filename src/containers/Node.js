@@ -6,6 +6,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import InputEditable from '../components/InputEditable'
 
+require( './style.styl' );
+
 export default class Node extends Component {
     handleDelete() {
         console.log( 'deleteNode(', this.props.node._id, ')' );
@@ -26,19 +28,19 @@ export default class Node extends Component {
         const { node, index } = this.props;
 
         return (
-            <tr>
-                <td>{ ( 1001 + index ).toString().substring( 1 ) }</td>
-                <td>
+            <div className='node'>
+                <div className='col'>{ ( 1001 + index ).toString().substring( 1 ) }</div>
+                <div className='col'>
                     <button onClick={ this.handleDelete.bind( this ) }> x</button>
-                </td>
-                <td><Link to={ node._id }>{ node._id }</Link></td>
-                <td>{ node._rev }</td>
-                <td><InputEditable key={ node._id + '_title' } html={ node.title }
-                                   onEdit={ this.handleEditTitle.bind( this ) }/></td>
-                <td><InputEditable key={ node._id + '_text' } html={ node.text }
-                                   onEdit={ this.handleEditText.bind( this ) }/></td>
+                </div>
+                <div className='col _id'><Link to={ node._id }>{ node._id }</Link></div>
+                <div className='col _rev'>{ node._rev }</div>
+                <div className='col'><InputEditable key={ node._id + '_title' } html={ node.title }
+                                   onEdit={ this.handleEditTitle.bind( this ) }/></div>
+                <div className='col'><InputEditable key={ node._id + '_text' } html={ node.text }
+                                   onEdit={ this.handleEditText.bind( this ) }/></div>
                 {/*<td><Editor key={ node._rev } html={ node.text }/></td>*/}
-            </tr>
+            </div>
         )
     }
 }

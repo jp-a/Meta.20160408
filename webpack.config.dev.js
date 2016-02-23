@@ -7,6 +7,9 @@ module.exports = {
     // devtool: 'eval-cheap-module-source-map',
     // devtool: 'eval-cheap-source-map',
     // devtool: 'eval',
+    resolve: {
+        extensions: [ '', '.js', '.styl' ]
+    },
     entry: [
         'eventsource-polyfill', // necessary for hot reloading with IE
         'webpack-hot-middleware/client',
@@ -27,6 +30,9 @@ module.exports = {
             test: /\.jsx?/,
             loaders: [ 'babel' ],
             include: path.join( __dirname, 'src' )
+        }, {
+            test: /\.styl$/,
+            loader: 'style-loader!css-loader!stylus-loader'
         } ]
     }
 };
