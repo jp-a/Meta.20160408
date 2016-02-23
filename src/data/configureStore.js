@@ -33,22 +33,22 @@ export default function configureStore() {
         remoteName: 'nodes-server'
     } );
 
-    // syncClient.connect( 'ws://localhost:3010' ).on( 'error', function ( err ) {
-    //     console.log( err );
-    // } );
-    //
-    // syncEvents.forEach( function ( event ) {
-    //     sync.on( event, function () {
-    //         store.dispatch( { type: types.SET_SYNC_STATE, text: event } );
-    //     } )
-    // } );
-    //
-    // clientEvents.forEach( function ( event ) {
-    //     syncClient.on( event, function () {
-    //         store.dispatch( { type: types.SET_SYNC_STATE, text: event } );
-    //     } )
-    // } );
-    //
+    syncClient.connect( 'ws://localhost:3010' ).on( 'error', function ( err ) {
+        console.log( err );
+    } );
+
+    syncEvents.forEach( function ( event ) {
+        sync.on( event, function () {
+            store.dispatch( { type: types.SET_SYNC_STATE, text: event } );
+        } )
+    } );
+
+    clientEvents.forEach( function ( event ) {
+        syncClient.on( event, function () {
+            store.dispatch( { type: types.SET_SYNC_STATE, text: event } );
+        } )
+    } );
+
     const pouchMiddleware = PouchMiddleware( {
         path: '/nodes',
         db,

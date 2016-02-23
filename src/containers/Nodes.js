@@ -25,14 +25,12 @@ class Nodes extends Component {
     }
 }
 
-import * as NodesActions from '../data/actions/nodes'
-Nodes = connect(
+import * as actions from '../data/actions/actions'
+export default connect(
     ( state ) => {
         return { nodes: state.nodes, syncState: state.syncState }
     },
     ( dispatch ) => {
-        return { actions: bindActionCreators( NodesActions, dispatch ) }
+        return { actions: bindActionCreators( actions, dispatch ) }
     }
 )( Nodes );
-
-export default Nodes

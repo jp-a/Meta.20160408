@@ -23,7 +23,7 @@ app.listen( 3000, 'localhost', function ( err ) {
         return;
     }
 
-    console.info( '[Meta|Server ] http://%s:%s', 'localhost', 3000 );
+    console.info( '[ Meta | Server  ] http://%s:%s', 'localhost', 3000 );
 } );
 
 
@@ -43,7 +43,7 @@ wss.on( 'error', function ( err ) {
 const db = new PouchDB( 'var/nodes-server' );
 
 server.listen( 3010, function () {
-    // console.info( '[Meta|PouchDB] ws://' + server.address().address + ':' + server.address().port );
+    console.info( '[ Meta | PouchDB ] ws://' + server.address().address + ':' + server.address().port );
 } );
 
 function onRequest( credentials, dbName, callback ) {

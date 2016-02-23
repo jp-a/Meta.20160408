@@ -40,13 +40,13 @@ class Meta extends Component {
 }
 
 // Meta.contextTypes = { router: PropTypes.object };
-import * as NodesActions from '../data/actions/nodes'
+import * as actions from '../data/actions/actions'
 Meta = connect(
     ( state ) => {
         return { nodes: state.nodes, syncState: state.syncState }
     },
     ( dispatch ) => {
-        return { actions: bindActionCreators( NodesActions, dispatch ) }
+        return { actions: bindActionCreators( actions, dispatch ) }
     }
 )( Meta );
 

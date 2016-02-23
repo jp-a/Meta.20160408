@@ -7,6 +7,8 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+
+
 class Navigation extends Component {
     handleAdd() {
         for ( var i = 0; i < 1; i++ ) {
@@ -26,13 +28,19 @@ class Navigation extends Component {
                 <tr>
                     <td><Link activeStyle={ ACTIVE } to='/'>home</Link></td>
                     <td><Link activeStyle={ ACTIVE } to='/about'>about</Link></td>
+                    <td><Link activeStyle={ ACTIVE } to='/login'>login</Link></td>
                     <td><Link activeStyle={ ACTIVE } to='/nodes'>nodes</Link></td>
-                    <td><Link activeStyle={ ACTIVE } to='/h5oevlhaor'>/h5oevlhaor</Link></td>
-                    <td><Link activeStyle={ ACTIVE } to='/6eleo03sor'>/6eleo03sor</Link></td>
 
-                    <td>
+                    { this.props.user.name && <td>
                         <button onClick={ this.handleAdd.bind( this ) }>+</button>
-                    </td>
+                    </td> }
+
+                    { this.props.user.name &&
+                        <td>&nbsp;&nbsp;&nbsp;<i>{ this.props.user.name }</i>
+                            {' '}
+                        <button onClick={() => this.props.actions.logout()}>Logout</button>
+                        </td>
+                    }
 
                     <td>&nbsp;&nbsp;&nbsp;<i>{ this.props.syncState.text }</i></td>
                 </tr>
@@ -44,14 +52,14 @@ class Navigation extends Component {
     }
 }
 
-import * as NodesActions from '../data/actions/nodes'
-Navigation = connect(
+import * as actions from '../data/actions/actions'
+export default connect(
     ( state ) => {
-        return { nodes: state.nodes, syncState: state.syncState }
+        return { user: state.user, nodes: state.nodes, syncState: state.syncState }
     },
     ( dispatch ) => {
-        return { actions: bindActionCreators( NodesActions, dispatch ) }
+        return { actions: bindActionCreators( actions, dispatch ) }
     }
 )( Navigation );
 
-export default Navigation
+
