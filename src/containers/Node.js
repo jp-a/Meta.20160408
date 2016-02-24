@@ -33,8 +33,8 @@ export default class Node extends Component {
                 <div className='col'>
                     <button onClick={ this.handleDelete.bind( this ) }> x</button>
                 </div>
-                <div className='col _id'><Link to={ node._id }>{ node._id }</Link></div>
-                <div className='col _rev'>{ node._rev }</div>
+                <div className='col _id'><Link to={ node._id } tooltip="test">{ node._id }</Link></div>
+                <div className='col _rev'><span className='value_short_rev'>{ node._rev.substr( 0, 5 ) }</span><span className='value_rev'>{ node._rev }</span></div>
                 <div className='col'><InputEditable key={ node._id + '_title' } html={ node.title }
                                    onEdit={ this.handleEditTitle.bind( this ) }/></div>
                 <div className='col'><InputEditable key={ node._id + '_text' } html={ node.text }

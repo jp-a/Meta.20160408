@@ -12,4 +12,11 @@ body
       &._id
         font-weight bold
       &._rev
-        display block
+        .value_rev
+          //margin-top: -0.1em
+          //margin-left: -0.1em
+          display none
+        &:hover .value_short_rev
+          display none
+        &:hover .value_rev
+          display block
