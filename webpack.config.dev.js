@@ -8,7 +8,7 @@ module.exports = {
     // devtool: 'eval-cheap-source-map',
     // devtool: 'eval',
     resolve: {
-        extensions: [ '', '.js', '.styl' ]
+        extensions: [ '', '.js', '.css', '.styl' ]
     },
     entry: [
         'eventsource-polyfill', // necessary for hot reloading with IE
@@ -30,6 +30,9 @@ module.exports = {
             test: /\.jsx?/,
             loaders: [ 'babel' ],
             include: path.join( __dirname, 'src' )
+        }, {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
         }, {
             test: /\.styl$/,
             loader: 'style-loader!css-loader!stylus-loader'

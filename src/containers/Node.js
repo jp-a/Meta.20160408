@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import InputEditable from '../components/InputEditable'
 import Draft from '../components/Draft'
+import Medium from '../components/Medium'
 
 require( './style.styl' );
 
@@ -47,10 +48,15 @@ export default class Node extends Component {
                 <div className='col'><Draft key={ node._rev + '_title' } html={ node.title }
                                    onEdit={ this.handleEditTitle.bind( this ) }/></div>
 
-                <div className='col'><Draft key={ node._rev + '_text' } html={ node.text }
+                {/*<td><Editor key={ node._rev } html={ node.text }/></td>*/}
+
+                {/*<div className='col'><Draft key={ node._rev + '_text' } html={ node.text }
+                                   onEdit={ this.handleEditText.bind( this ) }/></div>*/}
+
+                <div className='col'><Medium key={ node._rev + '_text' } html={ node.text }
                                    onEdit={ this.handleEditText.bind( this ) }/></div>
 
-                {/*<td><Editor key={ node._rev } html={ node.text }/></td>*/}
+
 
             </div>
         )
