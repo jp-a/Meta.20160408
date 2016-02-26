@@ -8,6 +8,8 @@ import InputEditable from '../components/InputEditable'
 import Draft from '../components/Draft'
 import Medium from '../components/Medium'
 
+import MdCancel from 'react-icons/lib/md/cancel'
+
 require( './style.styl' );
 
 export default class Node extends Component {
@@ -35,7 +37,7 @@ export default class Node extends Component {
                 <div className='col'>{ ( 1001 + index ).toString().substring( 1 ) }</div>
 
                 <div className='col'>
-                    <button onClick={ this.handleDelete.bind( this ) }> x</button>
+                    <MdCancel onClick={ this.handleDelete.bind( this ) }/>
                 </div>
 
                 <div className='col _id'><Link to={ node._id } tooltip="test">{ node._id }</Link></div>
