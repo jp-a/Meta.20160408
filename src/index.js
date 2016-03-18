@@ -5,6 +5,9 @@ import { Provider, connect } from 'react-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { routeActions } from 'react-router-redux'
 
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
+
 import DevTools from './containers/DevTools'
 
 import Home from './containers/Home'
@@ -38,7 +41,8 @@ render( (
             <Route path='home' component={ Home }/>
             <Route path='about' component={ About }/>
             <Route path='login' component={ Login }/>
-            <Route path="*" component={ UserIsAuthenticated( Meta ) }/>
+            {/*<Route path="*" component={ UserIsAuthenticated( Meta ) }/>*/}
+            <Route path="*" component={ Meta }/>
             <DevTools/>
         </Router>
     </Provider>

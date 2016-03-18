@@ -1,5 +1,9 @@
 .idea
 
+.vagrant
+bootstrap.sh
+Vagrantfile
+
 .DS_Store
 node_modules
 npm-debug.log

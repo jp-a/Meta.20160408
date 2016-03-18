@@ -42,7 +42,7 @@ export default class Node extends Component {
 
                 <div className='col _id'><Link to={ node._id } tooltip="test">{ node._id }</Link></div>
 
-                <div className='col _rev'><span className='value_short_rev'>{ node._rev.substr( 0, 5 ) }</span><span className='value_rev'>{ node._rev }</span></div>
+                <div className='col _rev'><span className='value_short_rev'>{ node._rev && ( ' (' + node._rev.substr( 0, 1 ) ) + ')' }</span><span className='value_rev'>{ node._rev }</span></div>
 
                 {/*<div className='col'><InputEditable key={ node._id + '_title' } html={ node.title }
                                     onEdit={ this.handleEditTitle.bind( this ) }/></div>*/}
@@ -55,7 +55,7 @@ export default class Node extends Component {
                 {/*<div className='col'><Draft key={ node._rev + '_text' } html={ node.text }
                                    onEdit={ this.handleEditText.bind( this ) }/></div>*/}
 
-                <div className='col'><Medium key={ node._rev + '_text' } html={ node.text }
+                <div className='col _text'><Medium key={ node._rev + '_text' } html={ node.text }
                                    onEdit={ this.handleEditText.bind( this ) }/></div>
 
 

@@ -8,7 +8,7 @@ require( 'medium-editor/dist/css/themes/default.css' );
 export default class Medium extends Component {
     constructor( props, context ) {
         super( props, context );
-        console.log( 'Initial content:', this.props.html );
+        // console.log( 'Initial content:', this.props.html );
 
         this.state = { text: this.props.html };
     }
@@ -27,6 +27,10 @@ export default class Medium extends Component {
         this.setState( { text: text } );
     }
 
+    handleCallback( url ) {
+        console.log( 'onCallback', url );
+    }
+
     render() {
         return (
             <Editor
@@ -36,7 +40,14 @@ export default class Medium extends Component {
                 onBlur={ this.handleBlur.bind( this ) }
                 text={ this.state.text }
                 onChange={ this.handleChange.bind( this ) }
-                options={ { toolbar: { buttons: [ 'bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote' ] } } }
+                options={ {
+                    toolbar: { buttons: [ 'bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote' ] },
+                    anchorPreview: {
+                        hideDelay: 1,
+                        previewValueSelector: 'a',
+                        callback: this.handleCallback.bind( this )
+                    }
+                } }
             />
         )
     }

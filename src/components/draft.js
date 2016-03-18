@@ -1,33 +1,37 @@
 import React, { Component } from 'react'
-import { Editor, EditorState, ContentState, RichUtils, convertToRaw } from 'draft-js';
+import { Editor, EditorState, ContentState, createFromBlockArray, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
+// import backdraft from 'backdraft-js'
 
 
 export default class Draft extends Component {
     constructor( props, context ) {
         super( props, context );
-        console.log( 'Initial content:', this.props.html );
+
+        console.log( 'Initial content:', typeof this.props.html, this.props.html );
+        const content = JSON.parse( this.props.html );
+
+        const contentState = typeof( content ) == 'object' ? ContentState.createFromBlockArray( convertFromRaw( content ) ) : ContentState.createFromText( content );
+        // console.log( contentState );
+
         this.state = {
             editorState: EditorState.createWithContent(
-
-                // ContentState.createFromText( '...' )
-                ContentState.createFromText( this.props.html )
+                contentState
             )
         };
+
         this.focus = () => {
             console.log( 'focus' );
             this.refs.editor.focus();
         };
-
 
         this.onChange = ( editorState ) => {
             this.setState( { editorState } );
         };
 
         this.onBlur = ( event ) => {
-            const content = convertToRaw( this.state.editorState.getCurrentContent() );
-            const rawContent  = content.blocks.map( function( line ){ return line.text } ).join( "\n" );
-            console.log( 'Content:', rawContent );
-            this.props.onEdit( rawContent );
+            const content = JSON.stringify( convertToRaw( this.state.editorState.getCurrentContent() ) );
+            console.log( 'Content:', content );
+            this.props.onEdit( content );
 
         };
 
