@@ -1,26 +1,64 @@
 import React, { Component } from 'react'
-import { Editor, EditorState, ContentState, createFromBlockArray, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
-// import backdraft from 'backdraft-js'
+import { Editor, EditorState, ContentState, CompositeDecorator, RichUtils, createFromBlockArray, convertToRaw, convertFromRaw } from 'draft-js';
 
+import HandleSpan from './HandleSpan'
+import HashtagSpan from './HashtagSpan'
+
+
+/**
+ * Super simple decorators for handles and hashtags, for demonstration
+ * purposes only. Don't reuse these regexes.
+ */
+const HANDLE_REGEX = /\@[\w]+/g; //(^|\s)@(\w+)
+const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
+
+function handleStrategy( contentBlock, callback ) {
+    findWithRegex( HANDLE_REGEX, contentBlock, callback );
+}
+
+function hashtagStrategy( contentBlock, callback ) {
+    findWithRegex( HASHTAG_REGEX, contentBlock, callback );
+}
+
+function findWithRegex( regex, contentBlock, callback ) {
+    const text = contentBlock.getText();
+    let matchArr, start;
+    while ( (matchArr = regex.exec( text )) !== null ) {
+        start = matchArr.index;
+        callback( start, start + matchArr[ 0 ].length );
+    }
+}
 
 export default class Draft extends Component {
     constructor( props, context ) {
         super( props, context );
 
-        console.log( 'Initial content:', typeof this.props.html, this.props.html );
+        const compositeDecorator = new CompositeDecorator([
+            {
+                strategy: handleStrategy,
+                component: HandleSpan
+            },
+            {
+                strategy: hashtagStrategy,
+                component: HashtagSpan
+            },
+        ]);
+        
+        // console.log( 'Initial content:', typeof this.props.html, this.props.html );
         const content = JSON.parse( this.props.html );
 
         const contentState = typeof( content ) == 'object' ? ContentState.createFromBlockArray( convertFromRaw( content ) ) : ContentState.createFromText( content );
-        // console.log( contentState );
 
         this.state = {
             editorState: EditorState.createWithContent(
-                contentState
+                contentState,
+                compositeDecorator
             )
         };
 
+        
         this.focus = () => {
-            console.log( 'focus' );
+            // console.log( 'focus' );
             this.refs.editor.focus();
         };
 
@@ -30,7 +68,7 @@ export default class Draft extends Component {
 
         this.onBlur = ( event ) => {
             const content = JSON.stringify( convertToRaw( this.state.editorState.getCurrentContent() ) );
-            console.log( 'Content:', content );
+            // console.log( 'Content:', content );
             this.props.onEdit( content );
 
         };
@@ -86,17 +124,5 @@ export default class Draft extends Component {
             </div>
 
         )
-
-        //     <div>
-        //     <Editor
-        // editorState={ this.state.editorState }
-        // handleKeyCommand={ this.handleKeyCommand }
-        // onChange={ this.onChange }
-        // placeholder='Tell a story...'
-        // ref='editor'
-        // spellCheck={ true }
-        //     />
-        //     </div>
-
     }
 }
