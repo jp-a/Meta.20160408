@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 
 import Node from './Node'
 
+import style from './style.styl'
+
 class Nodes extends Component {
     handleDelete( event ) {
         console.log( 'deleteNode(', id, ')' );
@@ -13,7 +15,7 @@ class Nodes extends Component {
 
     render() {
         return <div>
-            <div className='nodes'>
+            <div className={ style.nodes }>
                 { this.props.nodes.map( ( node, index ) =>
                     <Node key={ node._id } index={ index } node={ node }
                           actions={ this.props.actions }/>

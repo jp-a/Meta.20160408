@@ -15,7 +15,7 @@ class Navigation extends Component {
             console.log( 'addNode()' );
             this.props.actions.addNode( {
                 title: JSON.stringify( 'Node ' + ( this.props.nodes.length + 1 + i ) ),
-                text: 'Hello World!'
+                content: JSON.stringify( 'Hello World!' )
             } );
         }
     }

@@ -18,6 +18,8 @@ import Login from './containers/Login'
 import configureStore from './data/configureStore'
 const store = configureStore();
 
+require( './style.gstyl' );
+
 const UserIsAuthenticated = UserAuthWrapper( {
     authSelector: state => state.user,
     redirectAction: routeActions.replace,
