@@ -3,9 +3,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import Paper from 'material-ui/lib/paper'
+
 import Node from './Node'
 
 import style from './style.styl'
+
+const localStyle = {
+    margin: 20,
+    padding: 20,
+    // display: 'inline-block',
+};
 
 class Nodes extends Component {
     handleDelete( event ) {
@@ -17,8 +25,10 @@ class Nodes extends Component {
         return <div>
             <div className={ style.nodes }>
                 { this.props.nodes.map( ( node, index ) =>
-                    <Node key={ node._id } index={ index } node={ node }
+                    <Paper style={ localStyle } zDepth={1}>
+                        <Node key={ node._id } index={ index } node={ node }
                           actions={ this.props.actions }/>
+                    </Paper>
                 ) }
             </div>
         </div>
