@@ -4,11 +4,11 @@
 import React, { Component } from 'react'
 import Navigation from './Navigation'
 
-export default class Home extends Component {
+export default class Index extends Component {
     render() {
         return <div>
             <Navigation/>
-            <span>Home</span>
+            <span>Index</span>
         </div>
     }
 }

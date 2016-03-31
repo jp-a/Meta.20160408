@@ -30,6 +30,7 @@ module.exports = {
             {
                 test: /\.jsx?/,
                 loaders: [ 'babel' ],
+                exclude: /node_modules/,
                 include: path.join( __dirname, 'src' )
             },
             {
@@ -48,6 +49,10 @@ module.exports = {
                     'css-loader?modules&importLoaders=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]',
                     'stylus-loader?outputStyle=expanded&sourceMap'
                 ]
+            },
+            {
+                test: /masonry|imagesloaded|fizzy\-ui\-utils|desandro\-|outlayer|get\-size|doc\-ready|eventie|eventemitter/,
+                loader: 'imports?define=>false&this=>window'
             }
         ]
     }

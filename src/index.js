@@ -10,10 +10,13 @@ injectTapEventPlugin();
 
 import DevTools from './containers/DevTools'
 
-import Home from './containers/Home'
+import Index from './containers/Index'
 import About from './containers/About'
-import Meta from './containers/Meta'
 import Login from './containers/Login'
+import Grid from './containers/NodesGridLayout'
+import Masonry from './containers/NodesMasonry'
+import Flexbox from './containers/NodesFlexbox'
+import Meta from './containers/Meta'
 
 import configureStore from './data/configureStore'
 const store = configureStore();
@@ -39,10 +42,13 @@ console.log( '[Meta] render' );
 render( (
     <Provider store={ store }>
         <Router history={ browserHistory }>
-            <Route path='/' component={ Home }/>
-            <Route path='home' component={ Home }/>
+            <Route path='/' component={ Index }/>
+            <Route path='index' component={ Index }/>
             <Route path='about' component={ About }/>
             <Route path='login' component={ Login }/>
+            <Route path='grid' component={ Grid }/>
+            <Route path='masonry' component={ Masonry }/>
+            <Route path='flexbox' component={ Flexbox }/>
             {/*<Route path="*" component={ UserIsAuthenticated( Meta ) }/>*/}
             <Route path="*" component={ Meta }/>
             <DevTools/>

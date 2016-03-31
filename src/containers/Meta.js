@@ -5,14 +5,36 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Navigation from './Navigation'
-import Nodes from './Nodes'
+import Nodes from './NodesFlexbox'
 import Node from './Node'
+
+import FlatButton from 'material-ui/lib/flat-button'
+import ContentAdd from 'material-ui/lib/svg-icons/content/add'
+
+const style = {
+    node: {
+        width: '80%',
+        margin: '0 auto'
+    },
+};
 
 class Meta extends Component {
     constructor( props ) {
         super( props );
         this.state = {};
     }
+
+    handleAdd() {
+        console.log( 'createNode()' );
+        this.props.actions.addNode( {
+            _id: this.props.params.splat,
+            title: JSON.stringify( this.props.params.splat ),
+            caption: '...',
+            url: 'https://unsplash.it/300/200?image=' + ( ( this.props.nodes.length + 1 ) * 10 ),
+            content: JSON.stringify( this.props.params.splat )
+        } );
+    }
+
 
     render() {
         console.log( '[Meta]', this.props.params.splat );
@@ -29,11 +51,14 @@ class Meta extends Component {
     return <div>
         <Navigation/>
 
-        <div>Meta{ this.props.params.splat && ( ': ' + this.props.params.splat ) }</div>
+        <div>
+            Meta{ this.props.params.splat && ( ': ' + this.props.params.splat ) }
+            { !node && ( this.props.params.splat != 'nodes' ) && <FlatButton onClick={ this.handleAdd.bind( this ) } label="" icon={<ContentAdd />} /> }
+        </div>
 
-        { !node && <Nodes/> }
+        { ( this.props.params.splat == 'nodes' ) && <Nodes/> }
         { this.state.node &&
-        <Node key={ node._id } index={ 0 } node={ node } actions={ this.props.actions }/> }
+        <Node key={ node._id } style={ style.node } index={ 0 } node={ node } actions={ this.props.actions }/> }
 
         </div>
     }

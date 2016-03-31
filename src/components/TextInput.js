@@ -8,23 +8,24 @@ class TextInput extends Component {
         };
     }
 
-    handleSubmit( _e ) {
-        const text = _e.target.value.trim();
-        if ( _e.which === 13 ) {
-            this.props.onSave( text );
-        }
+    handleBlur( _e ) {
+        this.props.onEdit( _e.target.value );
     }
 
     handleChange( _e ) {
         this.setState( { text: _e.target.value } );
     }
 
-    handleBlur( _e ) {
-        this.props.onSave( _e.target.value );
+
+    handleSubmit( _e ) {
+        const text = _e.target.value.trim();
+        if ( _e.which === 13 ) {
+            this.props.onEdit( text );
+        }
     }
 
     handleSave( text ) {
-        this.props.onSave( text );
+        this.props.onEdit( text );
     }
 
     render() {
@@ -45,7 +46,7 @@ class TextInput extends Component {
 //{/*<ContentEditable onBlur={ this.handleSave.bind( this ) } html={ this.state.text } />*/}
 
 TextInput.propTypes = {
-    onSave: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     text: PropTypes.string,
     placeholder: PropTypes.string,
     editing: PropTypes.bool,

@@ -5,14 +5,16 @@ import { bindActionCreators } from 'redux'
 
 import Masonry from 'react-masonry-component'
 
+import Navigation from './Navigation'
 import Node from './Node'
 
-import style from './style.styl'
-
-const localStyle = {
-    margin: '20px',
-    // padding: '20',
-    // display: 'inline-block',
+const style = {
+    container: {
+    },
+    node: {
+        width: '300px',
+        margin: '1em'
+    },
 };
 
 class Nodes extends Component {
@@ -23,6 +25,8 @@ class Nodes extends Component {
 
     render() {
         return(
+            <div>
+            <Navigation/>
             <Masonry
                 className={ '' }
                 elementType={ 'div' }
@@ -30,9 +34,10 @@ class Nodes extends Component {
                 disableImagesLoaded={ false }
                 >
                 { this.props.nodes.map( ( node, index ) =>
-                    <Node key={ node._id } index={ index } node={ node } actions={ this.props.actions }/>
+                    <Node key={ node._id } style={ style.node } index={ index } node={ node } actions={ this.props.actions }/>
                 ) }
             </Masonry>
+            </div>
         )
     }
 }
