@@ -22,6 +22,11 @@ import CardText from 'material-ui/lib/card/card-text';
 
 import MdCancel from 'react-icons/lib/md/cancel'
 
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import IconButton from 'material-ui/lib/icon-button';
+import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
+
 // import style from './style.styl'
 
 const style = {
@@ -42,7 +47,7 @@ export default class Node extends Component {
     }
 
     render() {
-        const { node, index } = this.props;
+        const { node } = this.props;
 
         return (
             <div style={ this.props.style }>
@@ -53,6 +58,19 @@ export default class Node extends Component {
                         // title=
                         subtitle={ <Link style={{ color: 'grey', textDecoration: 'none' } } to={ node._id }>{ node._id }</Link> }
                         // avatar={ "http://api.randomuser.me/portraits/med/men/" + index + ".jpg" }
+                        children={
+                        <IconMenu
+                            style={ { position: 'absolute', top: '0px', right: '0px' } }
+                            iconButtonElement={
+                              <IconButton><MoreVertIcon /></IconButton>
+                            }
+                            targetOrigin={ { horizontal: 'right', vertical: 'top' } }
+                            anchorOrigin={ { horizontal: 'right', vertical: 'top' } }
+                          >
+                            <MenuItem primaryText="Delete" onClick={ this.handleDelete.bind( this ) }/>
+                            <MenuItem primaryText="Add Caption" onClick={ () => this.props.actions.editNode( this.props.node._id, { caption: '...' } ) }/>
+                          </IconMenu>
+                        }
                     >
 
                     </CardHeader>
@@ -84,14 +102,17 @@ export default class Node extends Component {
                             html={ node.content }
                             onEdit={ ( content ) => this.props.actions.editNode( this.props.node._id, { content: content } ) }/>
                     </CardText>
-                    <CardActions>
-                        <FlatButton secondary={ true } label="Delete" onClick={ this.handleDelete.bind( this ) }/>
-                    </CardActions>
                 </Card>
             </div>
        )
     }
 }
+
+// <CardActions>
+//     <FlatButton secondary={ true } label="Delete" onClick={ this.handleDelete.bind( this ) }/>
+// </CardActions>
+
+
 
 // <div className={ style.node }>
 //

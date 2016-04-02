@@ -17,13 +17,13 @@ app.get( '*', function ( req, res ) {
     res.sendFile( path.join( __dirname, 'index.html' ) );
 } );
 
-app.listen( 3000, 'localhost', function ( err ) {
+app.listen( 3000, '0.0.0.0', function ( err ) {
     if ( err ) {
         console.error( err );
         return;
     }
 
-    console.info( '[ Meta | Server  ] http://%s:%s', 'localhost', 3000 );
+    console.info( '[ Meta | Server  ] http://%s:%s', '0.0.0.0', 3000 );
 } );
 
 

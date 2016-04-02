@@ -11,11 +11,6 @@ import Node from './Node'
 import FlatButton from 'material-ui/lib/flat-button'
 import ContentAdd from 'material-ui/lib/svg-icons/content/add'
 
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import Wiki from './Wiki'
-import WikiIndex from './WikiIndex'
-import WikiPage from './WikiPage'
-
 const style = {
     node: {
         width: '80%',
@@ -23,13 +18,10 @@ const style = {
     },
 };
 
-
 class Meta extends Component {
     constructor( props ) {
         super( props );
-        this.state = {
-            node: undefined
-        };
+        this.state = {};
     }
 
     handleAdd() {
@@ -43,37 +35,30 @@ class Meta extends Component {
         } );
     }
 
+
     render() {
-        const uri = /^([^/]+)\/?(.*)$/.exec( this.props.params.splat );
-        console.log( '[Meta]', this.props.params.splat, uri );
+        console.log( '[Meta]', this.props.params.splat );
 
-        const id =  uri[ 1 ] == 'wiki' ? uri[ 2 ] : uri[ 1 ];
-
-        if ( id ) {
+        let node = undefined;
+        if ( this.props.params.splat ) {
             // jpa - 15/02/2016 - 19:11 // lodash refusing to work for whatever reason... reverting to native.
             // node = _where( this.props.nodes, { _id: this.props.params.splat } )[ 0 ];
-            const node = this.props.nodes.filter( ( obj ) => obj._id === id )[ 0 ];
-            this.state.node = node ? <Node key={ node._id } node={ node } actions={ this.props.actions }/> : undefined;
-
-
-            this.children = this.state.node ?
-                <WikiPage { ...this.props } children={ this.state.node } params={ { id: id } } />
-                :
-                <FlatButton onClick={ this.handleAdd.bind( this ) } label="" icon={<ContentAdd />} />;
-        } else {
-            this.children = <Nodes />
+            node = this.props.nodes.filter( ( obj ) => obj._id === this.props.params.splat )[ 0 ];
+            if ( node ) this.state.node = node;
+            else this.state.node = undefined;
         }
 
+    return <div>
+        <Navigation/>
 
+        <div>
+            Meta{ this.props.params.splat && ( ': ' + this.props.params.splat ) }
+            { !node && ( this.props.params.splat != 'nodes' ) && <FlatButton onClick={ this.handleAdd.bind( this ) } label="" icon={<ContentAdd />} /> }
+        </div>
 
-
-
-        return <div>
-            <Navigation/>
-
-            <div>
-                { this.children }
-            </div>
+        { ( this.props.params.splat == 'nodes' ) && <Nodes/> }
+        { this.state.node &&
+        <Node key={ node._id } style={ style.node } index={ 0 } node={ node } actions={ this.props.actions }/> }
 
         </div>
     }

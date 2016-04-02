@@ -10,7 +10,7 @@ const width = '280px';
 const style = {
     container: {
         width: '92%',
-        margin: '1em auto',
+        margin: '64px auto',
         // MozColumnCount: columns,
         // WebkitColumnCount: columns,
         // columnCount: columns,

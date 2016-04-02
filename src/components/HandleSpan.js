@@ -25,7 +25,7 @@ export default class HandleSpan extends React.Component {
         const text = this.props.children[ 0 ].props.text.substring( 1 );
         console.log( e.metaKey, e, text );
         if ( e.metaKey ) alert( 'popup!' )
-        else browserHistory.push( '/' + text );
+        else browserHistory.push( text );
         // else window.location.href = 'http://www.google.com';
     }
 
