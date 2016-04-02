@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Navigation from './Navigation'
+
+
 
 const style = {
     node: {
@@ -19,7 +23,7 @@ class App extends Component {
     }
 
     render() {
-        console.log( '[App]', this.props.params.splat );
+        console.log( '[App]', window.location.pathname );
 
         return <div>
             <Navigation/>

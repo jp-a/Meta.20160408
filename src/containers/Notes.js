@@ -4,24 +4,34 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import WikiPage from './WikiPage'
-import Nodes from './NodesFlexbox'
+import Page from './NotePage'
+import Nodes from './NotesList'
 import Node from './Node'
 
 import FlatButton from 'material-ui/lib/flat-button'
 import ContentAdd from 'material-ui/lib/svg-icons/content/add'
 
 const style = {
-
+    body: {
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column',
+    },
     container: {
+        display: 'flex',
+        flex: 1
     },
-    node: {
-        width: '80%',
-        margin: '0 auto'
+    list: {
+        flex: '0 0 16em',
+        height: '100vh',
+        overflowY: 'scroll'
     },
+    content: {
+        flex: 1
+    }
 };
 
-class Wiki extends Component {
+class Notes extends Component {
     constructor( props ) {
         super( props );
     }
@@ -42,38 +52,43 @@ class Wiki extends Component {
     }
 
     render() {
-        console.log( '[Wiki]', this.props.params.splat );
+        console.log( '[Notes]', this.props.params.splat, id );
         const id = this.props.id;
         const node = this.findNode( id );
         const nodeInstance = node ? <Node key={ node._id } node={ node }
-                                       actions={ this.props.actions }/> : undefined;
+                                          actions={ this.props.actions }/> : undefined;
 
-        if( id ) {
+        if ( id ) {
             this.children = node ?
-                <WikiPage { ...this.props } children={ nodeInstance }
+                <Page { ...this.props } children={ nodeInstance }
                                             params={ { id: id } }/>
                 :
                 <FlatButton onClick={ this.handleAdd.bind( this ) } label=""
                             icon={<ContentAdd />}/>;
-        } else {
-            this.children = <Nodes />
         }
 
-        return <div style={ style.container }>
-                { this.children }
+        return <div style={ style.body }>
+            <div style={ style.container }>
+                <div style={ style.list }>
+                    <Nodes />
+                </div>
+                <div style={ style.content }>
+                    { this.children }
+                </div>
+            </div>
         </div>
     }
 }
 
 // Meta.contextTypes = { router: PropTypes.object };
 import * as actions from '../data/actions/actions'
-Wiki = connect(
+Notes = connect(
     ( state ) => {
         return { nodes: state.nodes, syncState: state.syncState }
     },
     ( dispatch ) => {
         return { actions: bindActionCreators( actions, dispatch ) }
     }
-)( Wiki );
+)( Notes );
 
-export default Wiki
+export default Notes

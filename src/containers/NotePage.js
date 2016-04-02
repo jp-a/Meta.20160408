@@ -6,12 +6,12 @@ import { bindActionCreators } from 'redux'
 
 const style = {
     content: {
-        width: '80%',
+        width: '96%',
         margin: '64px auto'
     },
 };
 
-class WikiPage extends Component {
+class Page extends Component {
     constructor( props ) {
         super( props );
     }
@@ -25,13 +25,13 @@ class WikiPage extends Component {
 
 
 import * as actions from '../data/actions/actions'
-WikiPage = connect(
+Page = connect(
     ( state ) => {
         return { nodes: state.nodes, syncState: state.syncState }
     },
     ( dispatch ) => {
         return { actions: bindActionCreators( actions, dispatch ) }
     }
-)( WikiPage );
+)( Page );
 
-export default WikiPage
+export default Page

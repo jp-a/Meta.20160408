@@ -52,13 +52,9 @@ export class MenuItems extends Component {
     render() {
         return <div>
             <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/'/> }>Index</MenuItem>
-            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/wiki/'/> }>wiki</MenuItem>
-            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/wiki/home'/> }>wiki/home</MenuItem>
-            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/wiki/page1'/> }>wiki/page1</MenuItem>
-            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/wiki/page2'/> }>wiki/page2</MenuItem>
-            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/home'/> }>/home</MenuItem>
-            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/page1'/> }>/page1</MenuItem>
-            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/page2'/> }>/page2</MenuItem>
+            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/wiki/'/> }>Wiki</MenuItem>
+            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/notes/'/> }>Notes</MenuItem>
+            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/test/error'/> }>Error</MenuItem>
         </div>
     }
 }
