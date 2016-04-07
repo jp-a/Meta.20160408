@@ -32,13 +32,10 @@ import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 const style = {
 };
 
-const defaultProps = {
-};
-
-
 export default class Node extends Component {
     constructor( props ) {
         super( props );
+
 
         this.state = {
             zDepth: 1,
@@ -47,21 +44,22 @@ export default class Node extends Component {
     }
 
     handleDelete() {
-        console.log( 'deleteNode(', this.state.node._id, ')' );
-        this.props.actions.deleteNode( this.state.node._id );
+        console.log( 'deleteNode(', this.props.node._id, ')' );
+        this.props.actions.deleteNode( this.props.node._id );
     }
 
     render() {
-        console.log( '[Node]', this.props.node._id, 'props:', this.props, 'state:', this.state );
+        // const { node } = this.props;
+        const node = this.state.node;
 
         return (
             <div style={ this.props.style }>
                 <span>&nbsp;</span>
-                {/*<Card zDepth={ this.state.zDepth } onMouseEnter={ () => this.setState( { zDepth: 2 } ) } onMouseLeave={ () => this.setState( { zDepth: 1 } ) }>*/}
+                {/*<Card zDepth={ this.state.zDepth } onMouseEnter={ () => this.setState( { zDepth: 1 } ) } onMouseLeave={ () => this.setState( { zDepth: 1 } ) }>*/}
                 <Card>
                     <CardHeader
-                        title={ <Link style={ { color: 'grey' } } to={ this.state.node._id }>{ this.state.node._id }</Link> }
-                        subtitle={ <span style={ { fontSize: 'x-small' } }>{ this.state.node._rev && this.state.node._rev.substr( 0, 10 ) }...</span> }
+                        title={ <Link style={ { color: 'grey' } } to={ node._id }>{ node._id }</Link> }
+                        subtitle={ <span style={ { fontSize: 'x-small' } }>{ node._rev.substr( 0, 10 ) }...</span> }
                         // avatar={ "http://api.randomuser.me/portraits/med/men/" + index + ".jpg" }
                         children={
                         <IconMenu
@@ -73,7 +71,7 @@ export default class Node extends Component {
                             anchorOrigin={ { horizontal: 'right', vertical: 'top' } }
                           >
                             <MenuItem primaryText="Delete" onClick={ this.handleDelete.bind( this ) }/>
-                            <MenuItem primaryText="Add Caption" onClick={ () => this.props.actions.editNode( this.state.node._id, { caption: '...' } ) }/>
+                            <MenuItem primaryText="Add Caption" onClick={ () => this.props.actions.editNode( this.props.node._id, { caption: '...' } ) }/>
                           </IconMenu>
                         }
                     >
@@ -82,39 +80,36 @@ export default class Node extends Component {
                     <CardMedia
                         overlay={ <CardTitle
                             title={ <InputEditable
-                                key={ this.state.node._rev + '_caption' }
-                                html={ this.state.node.caption }
-                                onEdit={ ( caption ) => this.props.actions.editNode( this.state.node._id, { caption: caption } ) }/> }
+                                key={ node._rev + '_caption' }
+                                html={ node.caption }
+                                onEdit={ ( caption ) => this.props.actions.editNode( this.props.node._id, { caption: caption } ) }/> }
                             subtitle={ <InputEditable
-                                key={ this.state.node._rev + '_url' }
-                                html={ this.state.node.url }
-                                onEdit={ ( url ) => this.props.actions.editNode( this.state.node._id, { url: url } ) }/> }
+                                key={ node._rev + '_url' }
+                                html={ node.url }
+                                onEdit={ ( url ) => this.props.actions.editNode( this.props.node._id, { url: url } ) }/> }
                             /> }
                     >
-                        <img src={ this.state.node.url } style={ { minHeight: '95px' } }/>
+                        <img src={ node.url } style={ { minHeight: '95px' } }/>
                     </CardMedia>
                     <CardTitle
                         title={ <Draft
-                            key={ this.state.node._rev + '_title' }
-                            html={ this.state.node.title }
-                            onEdit={ ( title ) => this.props.actions.editNode( this.state.node._id, { title: title } ) }
+                            key={ node._rev + '_title' }
+                            html={ node.title }
+                            onEdit={ ( title ) => this.props.actions.editNode( this.props.node._id, { title: title } ) }
                             /> }
                         subtitle={ 'tags' }
                     />
                     <CardText>
                         <Draft
-                            key={ this.state.node._rev + '_content' }
-                            html={ this.state.node.content }
-                            onEdit={ ( content ) => this.props.actions.editNode( this.state.node._id, { content: content } ) }/>
+                            key={ node._rev + '_content' }
+                            html={ node.content }
+                            onEdit={ ( content ) => this.props.actions.editNode( this.props.node._id, { content: content } ) }/>
                     </CardText>
                 </Card>
             </div>
        )
     }
 }
-
-Node.defaultProps = defaultProps;
-
 
 // <CardActions>
 //     <FlatButton secondary={ true } label="Delete" onClick={ this.handleDelete.bind( this ) }/>
@@ -151,4 +146,3 @@ Node.defaultProps = defaultProps;
 //                                         onEdit={ this.handleContentEdit.bind( this ) }/></div>
 //
 // </div>
-

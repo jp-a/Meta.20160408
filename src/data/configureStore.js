@@ -33,7 +33,7 @@ export default function configureStore() {
         remoteName: 'nodes-server'
     } );
 
-    syncClient.connect( 'ws://localhost:3010' ).on( 'error', function ( err ) {
+    syncClient.connect( 'ws://' + window.location.hostname + ':3010' ).on( 'error', function ( err ) {
         console.log( err );
     } );
 
@@ -42,7 +42,7 @@ export default function configureStore() {
             store.dispatch( { type: types.SET_SYNC_STATE, text: event } );
         } )
     } );
-
+    
     clientEvents.forEach( function ( event ) {
         syncClient.on( event, function () {
             store.dispatch( { type: types.SET_SYNC_STATE, text: event } );
@@ -61,7 +61,7 @@ export default function configureStore() {
 
     const reduxRouterMiddleware = syncHistory( browserHistory );
 
-    const enhancer = compose (
+    const enhancer = compose(
         applyMiddleware( pouchMiddleware, reduxRouterMiddleware )
         // , DevTools.instrument()
         , window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -80,5 +80,5 @@ export default function configureStore() {
         } );
     }
 
-    return store
+    return store;
 }

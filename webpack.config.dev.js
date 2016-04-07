@@ -3,7 +3,7 @@ var webpack = require( 'webpack' );
 
 module.exports = {
     devtool: 'source-map',
-    // devtool: 'eval-source-map',
+    //devtool: 'eval-source-map',
     // devtool: 'eval-cheap-module-source-map',
     // devtool: 'eval-cheap-source-map',
     // devtool: 'eval',

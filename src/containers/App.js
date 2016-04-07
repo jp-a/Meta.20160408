@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Navigation from './Navigation'
-
+import NodeState from './NodeState'
 
 
 const style = {
@@ -24,12 +24,14 @@ class App extends Component {
 
     render() {
         console.log( '[App]', window.location.pathname );
+        const node = this.props.nodes.filter( ( obj ) => obj._id === 'home' )[ 0 ]
 
         return <div>
             <Navigation/>
 
             <div>
                 { this.props.children }
+                {/* <NodeState key={ node._id } node={ node } actions={ this.props.actions } { ...this.props } /> */}
             </div>
 
         </div>

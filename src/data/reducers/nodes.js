@@ -37,12 +37,12 @@ export default function nodes( state = initialState, action ) {
 
         case DELETE_NODE:
             return state.filter( node =>
-                node._id !== action.id
+                node._id !== action._id
             );
 
         case EDIT_NODE:
             return state.map( node =>
-                node._id === action.id ?
+                node._id === action._id ?
                     Object.assign( {}, node, action.node ) :
                     node
             );
@@ -56,7 +56,7 @@ export default function nodes( state = initialState, action ) {
 
         case COMPLETE_NODE:
             return state.map( node =>
-                node._id === action.id ?
+                node._id === action._id ?
                     Object.assign( {}, node, { completed: !node.completed } ) :
                     node
             );

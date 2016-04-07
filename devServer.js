@@ -13,6 +13,8 @@ app.use( require( 'webpack-dev-middleware' )( compiler, {
 
 app.use( require( 'webpack-hot-middleware' )( compiler ) );
 
+app.use( express.static( 'public' ) );
+
 app.get( '*', function ( req, res ) {
     res.sendFile( path.join( __dirname, 'index.html' ) );
 } );
@@ -42,7 +44,7 @@ wss.on( 'error', function ( err ) {
 
 const db = new PouchDB( 'var/nodes-server' );
 
-server.listen( 3010, function () {
+server.listen( 3010, '0.0.0.0', function () {
     console.info( '[ Meta | PouchDB ] ws://' + server.address().address + ':' + server.address().port );
 } );
 

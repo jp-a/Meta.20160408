@@ -5,16 +5,16 @@ export function addNode( node ) {
     return { type: types.ADD_NODE, node }
 }
 
-export function deleteNode( id ) {
-    return { type: types.DELETE_NODE, id }
+export function deleteNode( _id ) {
+    return { type: types.DELETE_NODE, _id }
 }
 
-export function editNode( id, node ) {
-    return { type: types.EDIT_NODE, id, node }
+export function editNode( _id, node ) {
+    return { type: types.EDIT_NODE, _id, node }
 }
 
-export function completeNode( id ) {
-    return { type: types.COMPLETE_NODE, id }
+export function completeNode( _id ) {
+    return { type: types.COMPLETE_NODE, _id }
 }
 
 export function completeAll() {

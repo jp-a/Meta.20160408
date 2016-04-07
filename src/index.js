@@ -45,14 +45,16 @@ const UserIsAdmin = UserAuthWrapper( {
 console.log( '[Meta] render' );
 render( (
     <Provider store={ store }>
-        <Router history={ browserHistory }>
-            <Route path='/' component={ App }>
-                <IndexRoute component={ Index } />
-                <Route path='*' component={ Meta }>
+        <div>
+            <Router history={ browserHistory }>
+                <Route path='/' component={ App }>
+                    <IndexRoute component={ Index }/>
+                    <Route path='*' component={ Meta }/>
+
                 </Route>
-            </Route>
-            <DevTools/>
-        </Router>
+            </Router>
+            { !window.devToolsExtension ? <DevTools /> : null }
+        </div>
     </Provider>
 ), document.getElementById( 'root' ) );
 

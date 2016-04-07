@@ -29,11 +29,11 @@ class Wiki extends Component {
     handleAdd() {
         console.log( 'createNode()' );
         this.props.actions.addNode( {
-            _id: this.props.params.splat,
-            title: JSON.stringify( this.props.params.splat ),
+            _id: this.props.id,
+            title: JSON.stringify( this.props.id ),
             caption: '...',
             url: 'https://unsplash.it/300/200?image=' + ( ( this.props.nodes.length + 1 ) * 10 ),
-            content: JSON.stringify( this.props.params.splat )
+            content: JSON.stringify( this.props.id )
         } );
     }
 

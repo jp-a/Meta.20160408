@@ -54,6 +54,8 @@ export class MenuItems extends Component {
             <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/'/> }>Index</MenuItem>
             <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/wiki/'/> }>Wiki</MenuItem>
             <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/notes/'/> }>Notes</MenuItem>
+            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/node/home'/> }>Node/Home</MenuItem>
+            <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/visual'/> }>Visual</MenuItem>
             <MenuItem onTouchTap={ this.handleClose } containerElement={ <Link activeStyle={ style.menuItem.active } to='/test/error'/> }>Error</MenuItem>
         </div>
     }
